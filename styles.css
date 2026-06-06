@@ -1,0 +1,175 @@
+/*
+ * CustomProfile - Modal UI styles
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+.vc-custom-profile-modal {
+    width: 560px;
+    max-width: 95vw;
+}
+
+.vc-custom-profile-section {
+    margin-bottom: 20px;
+}
+
+.vc-custom-profile-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--header-secondary);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+}
+
+.vc-custom-profile-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.vc-custom-profile-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 16px;
+    background: var(--background-secondary);
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-normal);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    user-select: none;
+}
+
+.vc-custom-profile-pill:hover {
+    background: var(--background-modifier-hover);
+}
+
+.vc-custom-profile-pill.selected {
+    border-color: var(--brand-500);
+    background: color-mix(in srgb, var(--brand-500) 12%, var(--background-secondary));
+}
+
+.vc-custom-profile-pill img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.vc-custom-profile-deco-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.vc-custom-profile-deco-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.vc-custom-profile-deco-scroll {
+    max-height: 220px;
+    margin-bottom: 8px;
+}
+
+.vc-custom-profile-deco-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    gap: 8px;
+    padding-right: 4px;
+}
+
+.vc-custom-profile-deco {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    background: var(--background-secondary);
+    border: 2px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+}
+
+.vc-custom-profile-deco:hover {
+    border-color: var(--background-modifier-accent);
+}
+
+.vc-custom-profile-deco.selected {
+    border-color: var(--brand-500);
+}
+
+.vc-custom-profile-deco img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.vc-custom-profile-deco-none {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 4px;
+}
+
+.vc-custom-profile-input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.vc-custom-profile-date-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: none;
+    background: var(--input-background);
+    color: var(--text-normal);
+    font-size: 14px;
+    color-scheme: dark;
+}
+
+.vc-custom-profile-date-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1);
+    opacity: 0.7;
+}
+
+.vc-custom-profile-date-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.35;
+}
+
+.vc-custom-profile-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.vc-custom-profile-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+.vc-custom-profile-tier-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.vc-custom-profile-tier {
+    min-width: 72px;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+}
