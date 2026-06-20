@@ -50,7 +50,8 @@ try {
     $user = gh api user -q .login
     $branch = git branch --show-current
     if (-not $branch) { $branch = "master" }
-    Write-Host "irm https://raw.githubusercontent.com/$user/$RepoName/$branch/install-easy.ps1 | iex" -ForegroundColor Yellow
+    Write-Host "irm https://raw.githubusercontent.com/$user/$RepoName/$branch/install-easy.ps1 | iex"
+    Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -Command `"iex (irm 'https://raw.githubusercontent.com/$user/$RepoName/$branch/install-easy.ps1')`"" -ForegroundColor Yellow
     Write-Host ""
     Write-Host "Or link them to INSTALL-FRIEND.md on GitHub."
 }

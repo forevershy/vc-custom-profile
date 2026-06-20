@@ -1,18 +1,18 @@
 # CustomProfile — one-command GitHub installer
-# Friends paste this in PowerShell (no zip, no git needed):
-#   irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1 | iex
-#
-# Optional (power users):
-#   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1))) -DiscordBranch ptb
+# Friends paste this in PowerShell:
+#   powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (irm 'https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1')"
 
 param(
     [string]$Repo = "forevershy/vc-custom-profile",
     [string]$Branch = "master",
-    [ValidateSet("stable", "ptb", "canary", "all")]
+    [ValidateSet("stable", "ptb", "canary", "all", "auto")]
     [string]$DiscordBranch = "all"
 )
 
 $ErrorActionPreference = "Stop"
+
+# Older Windows PowerShell can fail GitHub downloads without TLS 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $RepoZipUrl = "https://github.com/$Repo/archive/refs/heads/$Branch.zip"
 $TempRoot = Join-Path $env:TEMP "vc-custom-profile-easy-install"
@@ -27,6 +27,8 @@ function Write-Step($msg) {
 Write-Host ""
 Write-Host "CustomProfile — easy installer" -ForegroundColor Green
 Write-Host "Repo: https://github.com/$Repo" -ForegroundColor DarkGray
+Write-Host ""
+Write-Host "Tip: use Windows PowerShell or PowerShell 7 — not Command Prompt." -ForegroundColor DarkGray
 
 if (Test-Path $TempRoot) {
     Remove-Item -Recurse -Force $TempRoot
@@ -38,7 +40,14 @@ try {
     Invoke-WebRequest -Uri $RepoZipUrl -OutFile $ZipPath -UseBasicParsing
 }
 catch {
-    throw "Could not download the plugin from GitHub. Check your internet connection and try again.`n$RepoZipUrl"
+    throw @"
+Could not download from GitHub.
+- Make sure you are connected to the internet
+- Try again in a few minutes
+- Or download the zip from https://github.com/$Repo and double-click install.bat
+
+URL: $RepoZipUrl
+"@
 }
 
 Write-Step "Extracting..."

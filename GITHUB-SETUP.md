@@ -5,7 +5,7 @@ Repo: **https://github.com/forevershy/vc-custom-profile**
 After you push updates, friends install with **one command** (share this link):
 
 ```powershell
-irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1 | iex
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (irm 'https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1')"
 ```
 
 Or send them **[INSTALL-FRIEND.md](INSTALL-FRIEND.md)** on GitHub.

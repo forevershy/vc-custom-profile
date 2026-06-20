@@ -11,10 +11,10 @@ Inspired by profile customization plugins like [fakeProfile](https://github.com/
 **Copy this into PowerShell and press Enter:**
 
 ```powershell
-irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1 | iex
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (irm 'https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1')"
 ```
 
-That's it. The installer downloads everything, sets up Vencord, and patches Discord (stable, PTB, and Canary if you have them).
+Use **PowerShell**, not Command Prompt. First run can take 5–15 minutes.
 
 Then: **Settings → Vencord → Plugins → enable CustomProfile → restart Discord**
 
