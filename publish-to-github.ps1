@@ -46,9 +46,13 @@ try {
     Write-Host "Done! Repo URL:" -ForegroundColor Green
     Write-Host $url
     Write-Host ""
-    Write-Host "Friend install command (Discord closed):"
+    Write-Host "Share this one-liner with friends (easiest):"
     $user = gh api user -q .login
-    Write-Host "git clone https://github.com/$user/$RepoName.git; cd $RepoName; powershell -ExecutionPolicy Bypass -File install.ps1" -ForegroundColor Yellow
+    $branch = git branch --show-current
+    if (-not $branch) { $branch = "master" }
+    Write-Host "irm https://raw.githubusercontent.com/$user/$RepoName/$branch/install-easy.ps1 | iex" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Or link them to INSTALL-FRIEND.md on GitHub."
 }
 finally {
     Pop-Location

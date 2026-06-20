@@ -6,6 +6,20 @@ A **client-side only** Vencord plugin that lets you customize how **your own** p
 
 Inspired by profile customization plugins like [fakeProfile](https://github.com/gujarathisampath/fakeProfile), but fully local with no external API or Discord server required.
 
+## Install (Windows)
+
+**Copy this into PowerShell and press Enter:**
+
+```powershell
+irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1 | iex
+```
+
+That's it. The installer downloads everything, sets up Vencord, and patches Discord (stable, PTB, and Canary if you have them).
+
+Then: **Settings → Vencord → Plugins → enable CustomProfile → restart Discord**
+
+More options: see **[INSTALL-FRIEND.md](INSTALL-FRIEND.md)**
+
 ## Features
 
 - **All official profile badges** — Staff, Partner, HypeSquad, Early Supporter, Verified Developer, Active Developer, and more
@@ -21,20 +35,9 @@ Inspired by profile customization plugins like [fakeProfile](https://github.com/
 - [Vencord built from source](https://docs.vencord.dev/installing/)
 - `BadgeAPI` (enabled automatically as a dependency)
 
-## Installation
+## Installation (developers)
 
-### Easy install (recommended for friends)
-
-1. Close Discord completely
-2. Send them the whole `vc-custom-profile` folder as a **zip**
-3. They unzip it, right-click **`install.ps1`** → **Run with PowerShell**
-4. When done: Discord → **Settings → Vencord → Plugins** → enable **CustomProfile** → restart
-
-See **`INSTALL-FRIEND.md`** for troubleshooting.
-
-The script auto-installs Git/Node (via winget), clones Vencord to `%USERPROFILE%\Vencord`, copies the plugin, builds, and injects.
-
-### Manual install (developers)
+### Manual install
 
 1. Clone or build Vencord from source if you haven't already:
    ```bash

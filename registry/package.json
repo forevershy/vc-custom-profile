@@ -1,0 +1,13 @@
+{
+  "name": "customprofile-registry",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "node server.mjs",
+    "tunnel": "node server.mjs & npx --yes cloudflared tunnel --url http://127.0.0.1:8787"
+  },
+  "devDependencies": {
+    "wrangler": "^4.98.0"
+  }
+}

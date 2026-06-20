@@ -10,6 +10,11 @@ import { Button } from "@webpack/common";
 
 import { CustomProfileModal } from "./components/CustomProfileModal";
 import type { BoostTier, NitroTier } from "./badges";
+import type { CustomBadgeDefinition } from "./customBadges";
+import {
+    DEFAULT_PROFILE_THEME_ACCENT,
+    DEFAULT_PROFILE_THEME_PRIMARY,
+} from "./profileTheme";
 
 export interface CustomProfileData {
     customUsername: string;
@@ -19,9 +24,20 @@ export interface CustomProfileData {
     nitroTier: NitroTier;
     boostTier: BoostTier;
     avatarDecoration: string;
+    /** When true, avatarDecoration replaces your real decoration locally (empty = none) */
+    avatarDecorationOverride: boolean;
     replaceRealBadges: boolean;
     /** YYYY-MM-DD, empty = use real account creation date */
     customAccountCreationDate: string;
+    customProfilePicture: string;
+    simulateNitro: boolean;
+    customBanner: string;
+    customBio: string;
+    customPronouns: string;
+    useProfileTheme: boolean;
+    profileThemePrimary: number;
+    profileThemeAccent: number;
+    customBadges: CustomBadgeDefinition[];
 }
 
 export const DEFAULT_PROFILE: CustomProfileData = {
@@ -32,8 +48,18 @@ export const DEFAULT_PROFILE: CustomProfileData = {
     nitroTier: "none",
     boostTier: "none",
     avatarDecoration: "",
+    avatarDecorationOverride: false,
     replaceRealBadges: false,
     customAccountCreationDate: "",
+    customProfilePicture: "",
+    simulateNitro: false,
+    customBanner: "",
+    customBio: "",
+    customPronouns: "",
+    useProfileTheme: false,
+    profileThemePrimary: DEFAULT_PROFILE_THEME_PRIMARY,
+    profileThemeAccent: DEFAULT_PROFILE_THEME_ACCENT,
+    customBadges: [],
 };
 
 export const settings = definePluginSettings({
@@ -42,6 +68,21 @@ export const settings = definePluginSettings({
         description: "Internal profile data storage",
         default: JSON.stringify(DEFAULT_PROFILE),
         hidden: true,
+    },
+    sharePublicly: {
+        type: OptionType.BOOLEAN,
+        description: "Upload your custom username and badges when you Save (requires Registry URL below)",
+        default: false,
+    },
+    syncProfilesFromOthers: {
+        type: OptionType.BOOLEAN,
+        description: "Download and show other users' shared profiles (requires Registry URL)",
+        default: true,
+    },
+    registryBaseUrl: {
+        type: OptionType.STRING,
+        description: "Profile registry URL — must match for you and your friends. Example: https://your-worker.workers.dev",
+        default: "",
     },
     openEditor: {
         type: OptionType.COMPONENT,
@@ -55,7 +96,12 @@ export const settings = definePluginSettings({
 
 export function getProfile(): CustomProfileData {
     try {
-        return { ...DEFAULT_PROFILE, ...JSON.parse(settings.store.profileJson) };
+        const parsed = JSON.parse(settings.store.profileJson);
+        return {
+            ...DEFAULT_PROFILE,
+            ...parsed,
+            customBadges: Array.isArray(parsed.customBadges) ? parsed.customBadges : [],
+        };
     } catch {
         return { ...DEFAULT_PROFILE };
     }

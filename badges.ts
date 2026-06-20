@@ -218,7 +218,10 @@ export const BOOST_TIERS: { id: BoostTier; name: string; months: number; iconHas
 ];
 
 /** Build badges in Discord's native profile.badges format */
-export function buildNativeProfileBadges(profile: CustomProfileData): NativeProfileBadge[] {
+export function buildNativeProfileBadges(profile: Pick<
+    CustomProfileData,
+    "selectedBadges" | "selectedSpecialBadges" | "nitroTier" | "boostTier"
+>): NativeProfileBadge[] {
     const badges: NativeProfileBadge[] = [];
 
     for (const badgeId of profile.selectedBadges) {
@@ -241,6 +244,27 @@ export function buildNativeProfileBadges(profile: CustomProfileData): NativeProf
     const boost = BOOST_TIERS.find(t => t.id === profile.boostTier);
     if (boost && boost.id !== "none") {
         badges.push({ id: boost.discordId, description: `Server Booster (${boost.name})`, icon: boost.iconHash });
+    }
+
+    return badges;
+}
+
+export function buildNativeProfileBadgesFromEffective(profile: Pick<
+    CustomProfileData,
+    "selectedBadges" | "selectedSpecialBadges"
+>): NativeProfileBadge[] {
+    const badges: NativeProfileBadge[] = [];
+
+    for (const badgeId of profile.selectedBadges) {
+        const def = PROFILE_BADGES.find(b => b.id === badgeId);
+        if (!def) continue;
+        badges.push({ id: def.discordId, description: def.description, icon: def.iconHash });
+    }
+
+    for (const specialId of profile.selectedSpecialBadges) {
+        const def = SPECIAL_BADGES.find(b => b.id === specialId);
+        if (!def) continue;
+        badges.push({ id: def.discordId, description: def.description, icon: def.iconHash });
     }
 
     return badges;

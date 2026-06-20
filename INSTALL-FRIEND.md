@@ -1,54 +1,52 @@
-# Easy install (for friends)
+# Install CustomProfile
 
-Pick **one** of these methods.
+**One command. No zip. No git. Works on Windows.**
 
----
+## Step 1 — Paste in PowerShell
 
-## Option A — Install from GitHub link (easiest)
-
-Your friend only needs this link and one command.
-
-1. **Close Discord completely**
-2. Open **PowerShell**
-3. Paste and run (replace `YOUR_GITHUB_USERNAME` with the repo owner):
+Open **PowerShell**, paste this, press Enter:
 
 ```powershell
-git clone https://github.com/YOUR_GITHUB_USERNAME/vc-custom-profile.git; cd vc-custom-profile; powershell -ExecutionPolicy Bypass -File install.ps1
+irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1 | iex
 ```
 
-4. Open Discord → **Settings → Vencord → Plugins** → enable **CustomProfile** → restart Discord
+The installer handles everything: closes Discord, downloads the plugin, sets up Vencord, and patches every Discord on your PC.
+
+First run can take a few minutes.
+
+## Step 2 — Enable the plugin
+
+1. Open Discord
+2. **Settings → Vencord → Plugins**
+3. Enable **CustomProfile**
+4. Restart Discord
+
+Open the editor: **Plugins → CustomProfile → Open Custom Profile Editor**
 
 ---
 
-## Option B — Download zip from GitHub
+## Other ways to install
 
-1. Go to the repo on GitHub
-2. Click **Code** → **Download ZIP**
-3. Unzip the folder
-4. **Close Discord**
-5. Right-click **`install.ps1`** → **Run with PowerShell**
-6. Enable **CustomProfile** in Vencord settings and restart Discord
-
----
-
-## If Windows blocks the script
-
-```powershell
-powershell -ExecutionPolicy Bypass -File install.ps1
-```
+| Method | How |
+|--------|-----|
+| **One command** (above) | Best for most people |
+| **Download zip** | GitHub → Code → Download ZIP → unzip → double-click `install.bat` |
+| **Only Discord PTB** | `& ([scriptblock]::Create((irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1))) -DiscordBranch ptb` |
 
 ---
 
 ## Updating
 
-**GitHub command method:** run the same clone/install command again (or pull if they kept the folder).
+Run the same one-liner again:
 
-**Zip method:** download the latest zip and run `install.ps1` again.
+```powershell
+irm https://raw.githubusercontent.com/forevershy/vc-custom-profile/master/install-easy.ps1 | iex
+```
 
 ---
 
-## Important
+## Notes
 
-- **Only you see the fake profile** — it's client-side only
-- **Trust who you get this from** — only run scripts from people/repos you trust
-- If Discord updates break the plugin, install again from the latest GitHub version
+- **Only you see the fake profile** — changes are client-side only
+- Only install from repos you trust
+- If Discord updates break the plugin, run the install command again
